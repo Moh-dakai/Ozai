@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Home from './Home';
+import BlogList from './pages/BlogList';
+import BlogForm from './components/BlogForm';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [blogs, setBlogs] = useState([
+    { id: 1, title: 'First Blog', author: 'Alice', context: 'Sample context' },
+    { id: 2, title: 'Second Blog', author: 'Bob', context: 'Another context' }
+  ]);
+
+  const addBlog = (blog) => {
+    setBlogs([blog, ...blogs]);
+  };
+
+  const deleteBlog = (id) => {
+    setBlogs(blogs.filter(blog => blog.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <Home />
+      <BlogForm onAddBlog={addBlog} />
+      <BlogList blogs={blogs} onDeleteBlog={deleteBlog} />
+    </div>
+  );
 }
 
-export default App
+export default App;
