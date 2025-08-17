@@ -8,7 +8,7 @@ const BlogList = ({ blogs, onDeleteBlog }) => {
           <h2>{blog.title}</h2>
           <p><strong>Author:</strong> {blog.author}</p>
           <p>{blog.context}</p>
-          <button className="delete-btn" onClick={() => onDeleteBlog(blog.id)}>Delete</button>
+<button className="delete-btn" onClick={() => onDeleteBlog(blog.id)}>Delete</button>
         </div>
       ))}
     </div>

@@ -1,68 +1,135 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  color: #333;
 }
 
 body {
-  margin: 0;
+  background: #f9f9f9;
+}
+
+.navbar {
+  padding: 20px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.navbar h1 {
+  color: #f1356d;
 }
 
-button {
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: #333;
+}
+
+.navbar a:hover {
+  color: #f1356d;
+}
+
+.App {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.blog-list {
+  margin-top: 20px;
+}
+
+.blog-preview {
+  background: #fff;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  margin-bottom: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.blog-form {
+  margin: 20px 0;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.blog-form input,
+.blog-form textarea {
+  display: block;
+  margin-bottom: 14px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #f7f7f7;
+  transition: border-color 0.2s;
+}
+
+.blog-form input:focus,
+.blog-form textarea:focus {
+  border-color: #f1356d;
+  outline: none;
+}
+
+.blog-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.blog-form button {
+  background: #f1356d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.blog-form button:hover {
+  background: #e0245e;
+  box-shadow: 0 2px 8px rgba(241, 53, 109, 0.15);
+}
+
+.blog-form button {
+  background: #f1356d;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.blog-form button:hover {
+  background: #e0245e;
+}
+
+.delete-btn {
+  background: #fff;
+  color: #f1356d;
+  border: 1px solid #f1356d;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  background: #f1356d;
+  color: #fff;
 }
