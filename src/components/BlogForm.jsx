@@ -9,7 +9,6 @@ const BlogForm = ({ onAddBlog }) => {
     e.preventDefault();
     if (!title || !author || !context) return;
     onAddBlog({
-      id: Date.now(),
       title,
       author,
       context
