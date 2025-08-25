@@ -8,14 +8,14 @@ function App() {
 
   // Fetch blogs from backend
   useEffect(() => {
-    fetch('http://localhost:5000/blogs')
+    fetch('VITE_API_URL/blogs')
       .then(res => res.json())
       .then(data => setBlogs(data));
   }, []);
 
   // Add blog via backend
   const addBlog = (blog) => {
-    fetch('http://localhost:5000/blogs', {
+    fetch('VITE_API_URL/blogs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -30,7 +30,7 @@ function App() {
 
   // Delete blog via backend
   const deleteBlog = (id) => {
-    fetch(`http://localhost:5000/blogs/${id}`, {
+    fetch(`VITE_API_URL/blogs/${id}`, {
       method: 'DELETE'
     })
       .then(() => setBlogs(blogs.filter(blog => blog._id !== id)));
