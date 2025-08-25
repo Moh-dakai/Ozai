@@ -8,14 +8,14 @@ function App() {
 
   // Fetch blogs from backend
   useEffect(() => {
-    fetch('VITE_API_URL/blogs')
+    fetch('https://ozai-9gqx.onrender.com/blogs')
       .then(res => res.json())
       .then(data => setBlogs(data));
   }, []);
 
   // Add blog via backend
   const addBlog = (blog) => {
-    fetch('VITE_API_URL/blogs', {
+    fetch('https://ozai-9gqx.onrender.com/blogs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -30,7 +30,7 @@ function App() {
 
   // Delete blog via backend
   const deleteBlog = (id) => {
-    fetch(`VITE_API_URL/blogs/${id}`, {
+    fetch(`https://ozai-9gqx.onrender.com/blogs/${id}`, {
       method: 'DELETE'
     })
       .then(() => setBlogs(blogs.filter(blog => blog._id !== id)));
