@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BlogList = ({ blogs, onDeleteBlog }) => {
+const BlogList = ({ blogs, onDeleteBlog, onEditBlog }) => {
   return (
     <div className="blog-list">
       {blogs.map(blog => (
@@ -9,6 +9,7 @@ const BlogList = ({ blogs, onDeleteBlog }) => {
           <p><strong>Author:</strong> {blog.author}</p>
           <p>{blog.content}</p>
           <p><small>{new Date(blog.createdAt).toLocaleString()}</small></p>
+          <button className="edit-btn" onClick={() => onEditBlog(blog)}>Edit</button>
           <button className="delete-btn" onClick={() => onDeleteBlog(blog._id)}>Delete</button>
         </div>
       ))}

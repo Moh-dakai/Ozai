@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const BlogForm = ({ onAddBlog }) => {
+const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [context, setContext] = useState('');
 
+  // Load blog data when editing
+  useEffect(() => {
+    if (editingBlog) {
+      setTitle(editingBlog.title);
+      setAuthor(editingBlog.author);
+      setContext(editingBlog.content);
+    } else {
+      setTitle('');
+      setAuthor('');
+      setContext('');
+    }
+  }, [editingBlog]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title || !author || !context) return;
-    onAddBlog({
-      title,
-      author,
-      context
-    });
+
+    if (editingBlog) {
+      onUpdateBlog({
+        ...editingBlog,
+        title,
+        author,
+        context
+      });
+    } else {
+      onAddBlog({
+        title,
+        author,
+        context
+      });
+    }
+
     setTitle('');
     setAuthor('');
     setContext('');
@@ -38,7 +62,9 @@ const BlogForm = ({ onAddBlog }) => {
         onChange={e => setContext(e.target.value)}
         rows={4}
       />
-      <button type="submit">Add Blog</button>
+      <button type="submit">
+        {editingBlog ? 'Update Blog' : 'Add Blog'}
+      </button>
     </form>
   );
 };

@@ -170,3 +170,24 @@ body {
   color: #fff;
   box-shadow: 0 4px 10px rgba(241, 53, 109, 0.2);
 }
+
+/* Edit Button */
+.edit-btn {
+  background: #fff;
+  color: #2d9cdb;
+  border: 1px solid #2d9cdb;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.edit-btn:hover {
+  background: #2d9cdb;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(45, 156, 219, 0.2);
+}

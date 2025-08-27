@@ -42,6 +42,21 @@ app.post("/blogs", async (req, res) => {
   res.json(newBlog);
 });
 
+// Update blog (edit feature)
+app.put("/blogs/:id", async (req, res) => {
+  try {
+    const { title, author, content } = req.body;
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      { title, author, content },
+      { new: true } // return the updated blog
+    );
+    res.json(updatedBlog);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating blog" });
+  }
+});
+
 // Delete blog
 app.delete("/blogs/:id", async (req, res) => {
   await Blog.findByIdAndDelete(req.params.id);
