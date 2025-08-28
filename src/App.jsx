@@ -1,77 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import Home from './Home';
-import BlogList from './pages/BlogList';
-import BlogForm from './components/BlogForm';
+import React, { useState, useEffect } from "react";
+import Home from "./Home";
+import BlogList from "./pages/BlogList";
+import BlogForm from "./components/BlogForm";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
   const [editingBlog, setEditingBlog] = useState(null);
+  const API_URL = "https://ozai-9gqx.onrender.com/blogs";
 
-  // Fetch blogs from backend
+  // Fetch blogs
   useEffect(() => {
-    fetch('https://ozai-9gqx.onrender.com/blogs')
+    fetch(API_URL)
       .then(res => res.json())
-      .then(data => setBlogs(data));
+      .then(setBlogs)
+      .catch(err => console.error("Error fetching blogs:", err));
   }, []);
 
-  // Add blog via backend
+  // Add blog
   const addBlog = (blog) => {
-    fetch('https://ozai-9gqx.onrender.com/blogs', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: blog.title,
         author: blog.author,
-        content: blog.context
-      })
+        content: blog.context,
+      }),
     })
       .then(res => res.json())
-      .then(newBlog => setBlogs([newBlog, ...blogs]));
+      .then(newBlog => setBlogs([newBlog, ...blogs]))
+      .catch(err => console.error("Error adding blog:", err));
   };
 
-  // Delete blog via backend
+  // Delete blog
   const deleteBlog = (id) => {
-    fetch(`https://ozai-9gqx.onrender.com/blogs/${id}`, {
-      method: 'DELETE'
-    })
-      .then(() => setBlogs(blogs.filter(blog => blog._id !== id)));
+    fetch(`${API_URL}/${id}`, { method: "DELETE" })
+      .then(() => setBlogs(blogs.filter(blog => blog._id !== id)))
+      .catch(err => console.error("Error deleting blog:", err));
   };
 
-  // Start editing a blog
-  const startEditBlog = (blog) => {
-    setEditingBlog(blog);
-  };
-
-  // Update blog via backend
+  // Update blog
   const updateBlog = (updatedBlog) => {
-    fetch(`https://ozai-9gqx.onrender.com/blogs/${updatedBlog._id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+    fetch(`${API_URL}/${updatedBlog._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: updatedBlog.title,
         author: updatedBlog.author,
-        content: updatedBlog.context
-      })
+        content: updatedBlog.context,
+      }),
     })
       .then(res => res.json())
       .then(savedBlog => {
         setBlogs(blogs.map(blog => (blog._id === savedBlog._id ? savedBlog : blog)));
-        setEditingBlog(null);
-      });
+        setEditingBlog(null); // reset after update
+      })
+      .catch(err => console.error("Error updating blog:", err));
   };
 
   return (
     <div className="App">
       <Home />
-      <BlogForm 
-        onAddBlog={addBlog} 
-        onUpdateBlog={updateBlog} 
-        editingBlog={editingBlog} 
+      <BlogForm
+        onAddBlog={addBlog}
+        onUpdateBlog={updateBlog}
+        editingBlog={editingBlog}
+        onCancelEdit={() => setEditingBlog(null)}   /* <-- Cancel support */
       />
-      <BlogList 
-        blogs={blogs} 
-        onDeleteBlog={deleteBlog} 
-        onEditBlog={startEditBlog} 
+      <BlogList
+        blogs={blogs}
+        onDeleteBlog={deleteBlog}
+        onEditBlog={setEditingBlog}
       />
     </div>
   );
