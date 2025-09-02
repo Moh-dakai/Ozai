@@ -191,3 +191,17 @@ body {
   color: #fff;
   box-shadow: 0 4px 10px rgba(45, 156, 219, 0.2);
 }
+
+.search-box {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.search-box input {
+  width: 80%;
+  max-width: 400px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+

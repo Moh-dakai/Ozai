@@ -35,6 +35,17 @@ app.get("/blogs", async (req, res) => {
   }
 });
 
+// Get single blog by ID
+app.get("/blogs/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) return res.status(404).json({ error: "Blog not found" });
+    res.json(blog);
+  } catch (err) {
+    res.status(400).json({ error: "Invalid blog ID" });
+  }
+});
+
 // Create blog
 app.post("/blogs", async (req, res) => {
   try {
