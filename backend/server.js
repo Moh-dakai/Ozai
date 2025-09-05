@@ -7,6 +7,7 @@ const passport = require("passport");
 const session = require("express-session");
 const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
 const jwt = require("jsonwebtoken");
+import blogRoutes from "./routes/blogs.js";
 
 const app = express();
 

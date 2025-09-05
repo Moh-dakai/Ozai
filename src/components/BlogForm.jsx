@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 
 const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
   const [context, setContext] = useState("");
 
   // Load blog data into form when editing
   useEffect(() => {
     if (editingBlog) {
       setTitle(editingBlog.title);
-      setAuthor(editingBlog.author);
       setContext(editingBlog.content);
     } else {
       resetForm();
@@ -18,18 +16,19 @@ const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
 
   const resetForm = () => {
     setTitle("");
-    setAuthor("");
     setContext("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !author || !context) return;
+    if (!title || !context) return;
+
+    const token = localStorage.getItem("token");
 
     if (editingBlog) {
-      onUpdateBlog({ ...editingBlog, title, author, context });
+      await onUpdateBlog({ ...editingBlog, title, context, token });
     } else {
-      onAddBlog({ title, author, context });
+      await onAddBlog({ title, context, token });
     }
 
     resetForm();
@@ -37,7 +36,7 @@ const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
 
   const handleCancel = () => {
     resetForm();
-    onCancelEdit?.(); // only call if passed from App.jsx
+    onCancelEdit?.();
   };
 
   return (
@@ -48,14 +47,8 @@ const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="Author"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-      />
       <textarea
-        placeholder="Context"
+        placeholder="Content"
         value={context}
         onChange={(e) => setContext(e.target.value)}
         rows={4}

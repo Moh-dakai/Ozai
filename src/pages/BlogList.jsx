@@ -1,22 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
 const BlogList = ({ blogs, onDeleteBlog, onEditBlog }) => {
   const [search, setSearch] = useState("");
+  const userId = localStorage.getItem("userId"); // stored in AuthHandler.jsx
 
   if (!blogs.length) {
     return <p className="no-blogs">No blogs available.</p>;
   }
 
-  // Filter blogs based on search term (title or author)
+  // Filter blogs based on search
   const filteredBlogs = blogs.filter((blog) =>
     blog.title.toLowerCase().includes(search.toLowerCase()) ||
-    blog.author.toLowerCase().includes(search.toLowerCase())
+    blog.author?.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleDelete = (id) => {
+    const token = localStorage.getItem("token");
+    onDeleteBlog(id, token);
+  };
 
   return (
     <div className="blog-list-container">
-      {/* Search Input */}
+      {/* Search */}
       <div className="search-box">
         <input
           type="text"
@@ -26,7 +29,7 @@ const BlogList = ({ blogs, onDeleteBlog, onEditBlog }) => {
         />
       </div>
 
-      {/* Blog List */}
+      {/* Blogs */}
       <div className="blog-list">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
@@ -38,14 +41,17 @@ const BlogList = ({ blogs, onDeleteBlog, onEditBlog }) => {
               <p>{blog.content.substring(0, 100)}...</p>
               <p><small>{new Date(blog.createdAt).toLocaleString()}</small></p>
 
-              <div className="blog-actions">
-                <button onClick={() => onEditBlog(blog)} className="edit-btn">
-                  Edit
-                </button>
-                <button onClick={() => onDeleteBlog(blog._id)} className="delete-btn">
-                  Delete
-                </button>
-              </div>
+              {/* Only show actions if this user owns the blog */}
+              {userId === blog.userId && (
+                <div className="blog-actions">
+                  <button onClick={() => onEditBlog(blog)} className="edit-btn">
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(blog._id)} className="delete-btn">
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           ))
         ) : (
@@ -55,5 +61,4 @@ const BlogList = ({ blogs, onDeleteBlog, onEditBlog }) => {
     </div>
   );
 };
-
 export default BlogList;
