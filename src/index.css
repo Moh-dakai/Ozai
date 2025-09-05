@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 :root{
   --bg-1: #fdf2f8;
   --bg-2: #f9fafb;
@@ -14,8 +15,6 @@
   --ease-med: 260ms;
   --max-width: 1200px;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0;font-family:"Quicksand",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#333}
 html,body,#root{height:100%}
