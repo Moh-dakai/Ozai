@@ -18,6 +18,7 @@ function App() {
       {/* Navbar */}
       <nav className="p-4 bg-gray-800 text-white flex gap-4">
         <Link to="/">Home</Link>
+        <Link to="/new">New Blog</Link>
         <Link to="/blogs">All Blogs</Link>
         {token && <Link to="/myblogs">My Blogs</Link>}
 
@@ -40,5 +41,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

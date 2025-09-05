@@ -1,21 +1,22 @@
-// src/pages/MyBlogs.jsx
 import { useEffect, useState } from "react";
+import BlogList from "./BlogList"; // reuse the BlogList component
 
-export default function MyBlogs() {
+const API_URL = "https://ozai-9gqx.onrender.com/blogs";
+
+const MyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (!token) {
-      window.location.href = "/"; // redirect if not logged in
+      setLoading(false);
       return;
     }
 
     fetch("https://ozai-9gqx.onrender.com/myblogs", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -23,29 +24,44 @@ export default function MyBlogs() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching my blogs:", err);
+        console.error("Error fetching user blogs:", err);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <p>⏳ Loading your blogs...</p>;
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("token");
+    if (!token) return alert("Not authenticated");
+
+    try {
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Delete failed");
+      setBlogs((prev) => prev.filter((b) => (b._id || b.id) !== id));
+    } catch (err) {
+      console.error("Failed to delete blog:", err);
+      alert("Failed to delete blog");
+    }
+  };
+
+  const handleEdit = (blog) => {
+    // Minimal: navigate to /new and let BlogsPage handle editing if you add that flow.
+    // For now just log — BlogsPage provides editing inline.
+    console.log("Edit requested:", blog);
+    alert("Edit flow not implemented here. Use Blogs page to edit.");
+  };
+
+  if (loading) return <p>Loading your blogs...</p>;
+  if (!blogs.length) return <p>You haven’t written any blogs yet.</p>;
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">My Blogs</h2>
-      {blogs.length === 0 ? (
-        <p>No blogs yet.</p>
-      ) : (
-        <ul className="space-y-3">
-          {blogs.map((blog) => (
-            <li key={blog._id} className="p-4 border rounded-lg">
-              <h3 className="text-xl font-semibold">{blog.title}</h3>
-              <p className="text-gray-600">{blog.content}</p>
-              <small className="text-gray-400">Created {new Date(blog.createdAt).toLocaleString()}</small>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div>
+      <h2 className="text-xl font-bold mb-4">My Blogs</h2>
+      <BlogList blogs={blogs} onDeleteBlog={handleDelete} onEditBlog={handleEdit} />
     </div>
   );
-}
+};
+
+export default MyBlogs;

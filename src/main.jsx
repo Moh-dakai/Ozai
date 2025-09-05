@@ -11,6 +11,8 @@ import AuthHandler from "./pages/AuthHandler.jsx";
 import MyBlogs from "./pages/MyBlogs.jsx";
 import BlogForm from "./components/BlogForm.jsx";
 import BlogsPage from "./pages/BlogsPage.jsx";
+import PrivateRoute from "./PrivateRoute";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -22,7 +24,11 @@ createRoot(document.getElementById("root")).render(
           <Route path="blogs/:id" element={<BlogDetails />} />
           <Route path="auth" element={<AuthHandler />} />
           <Route path="myblogs" element={<MyBlogs />} />
-          <Route path="new" element={<BlogForm />} />
+          <Route path="new" element={
+            <PrivateRoute>
+              <BlogForm />
+            </PrivateRoute>
+          } />
         </Route>
       </Routes>
     </BrowserRouter>

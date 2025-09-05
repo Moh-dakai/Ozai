@@ -7,7 +7,7 @@ const passport = require("passport");
 const session = require("express-session");
 const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
 const jwt = require("jsonwebtoken");
-import blogRoutes from "./routes/blogs.js";
+// removed ESM import to keep CommonJS server.js consistent
 
 const app = express();
 
@@ -193,7 +193,6 @@ app.put("/blogs/:id", authMiddleware, async (req, res) => {
 
     blog.title = req.body.title ?? blog.title;
     blog.content = req.body.content ?? blog.content;
-    // (author and userId should not be overwritten by client)
     const saved = await blog.save();
     res.json(saved);
   } catch (err) {
@@ -226,9 +225,4 @@ app.get("/myblogs", authMiddleware, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch user blogs" });
   }
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+});     

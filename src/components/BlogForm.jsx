@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
+const BlogForm = ({ editingBlog, onCancelEdit, onAddBlog, onUpdateBlog }) => {
   const [title, setTitle] = useState("");
   const [context, setContext] = useState("");
 
-  // Load blog data into form when editing
   useEffect(() => {
     if (editingBlog) {
-      setTitle(editingBlog.title);
-      setContext(editingBlog.content);
+      setTitle(editingBlog.title || "");
+      setContext(editingBlog.content || "");
     } else {
       resetForm();
     }
@@ -21,17 +20,55 @@ const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !context) return;
+    if (!title.trim() || !context.trim()) return;
 
     const token = localStorage.getItem("token");
-
-    if (editingBlog) {
-      await onUpdateBlog({ ...editingBlog, title, context, token });
-    } else {
-      await onAddBlog({ title, context, token });
+    if (!token) {
+      alert("You must be logged in to add a blog!");
+      return;
     }
 
-    resetForm();
+    try {
+      // Prefer parent handlers so pages can update local state
+      if (editingBlog && typeof onUpdateBlog === "function") {
+        await onUpdateBlog({ ...editingBlog, title, context });
+        resetForm();
+        return;
+      }
+
+      if (!editingBlog && typeof onAddBlog === "function") {
+        await onAddBlog({ title, context });
+        resetForm();
+        return;
+      }
+
+      // Fallback: call API directly if parent didn't provide handlers
+      let url = "https://ozai-9gqx.onrender.com/blogs";
+      let method = "POST";
+      if (editingBlog) {
+        url = `https://ozai-9gqx.onrender.com/blogs/${editingBlog._id || editingBlog.id}`;
+        method = "PUT";
+      }
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title, content: context }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to save blog");
+
+      resetForm();
+      // fallback navigation
+      window.location.href = "/myblogs";
+    } catch (err) {
+      console.error("Error:", err);
+      alert(err.message || "Something went wrong.");
+    }
   };
 
   const handleCancel = () => {
@@ -51,14 +88,14 @@ const BlogForm = ({ onAddBlog, onUpdateBlog, editingBlog, onCancelEdit }) => {
         placeholder="Content"
         value={context}
         onChange={(e) => setContext(e.target.value)}
-        rows={4}
+        rows={6}
       />
-      <div className="form-actions">
-        <button type="submit">
+      <div className="form-actions" style={{ display: "flex", gap: 8 }}>
+        <button type="submit" className="btn read-more">
           {editingBlog ? "Update Blog" : "Add Blog"}
         </button>
         {editingBlog && (
-          <button type="button" onClick={handleCancel}>
+          <button type="button" onClick={handleCancel} className="btn btn-outline">
             Cancel
           </button>
         )}
