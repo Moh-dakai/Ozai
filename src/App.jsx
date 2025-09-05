@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
@@ -13,34 +13,46 @@ function App() {
     navigate("/");
   };
 
+  // Backend OAuth start endpoint (open the provider flow)
+  const BACKEND_OAUTH = "https://ozai-9gqx.onrender.com/auth/google";
+
   return (
     <div className="App">
-      {/* Navbar */}
-      <nav className="p-4 bg-gray-800 text-white flex gap-4">
-        <Link to="/">Home</Link>
-        <Link to="/new">New Blog</Link>
-        <Link to="/blogs">All Blogs</Link>
-        {token && <Link to="/myblogs">My Blogs</Link>}
+      <nav className="navbar">
+        <h1>
+          <span className="brand-mark" />
+          LOBO
+        </h1>
 
-        {token ? (
-          <>
-            <span>Hi, {userName}</span>
-            <button onClick={handleLogout} className="ml-2 bg-red-500 px-2 rounded">
-              Logout
-            </button>
-          </>
-        ) : (
-          <a href="https://ozai-9gqx.onrender.com/auth/google">Login with Google</a>
-        )}
+        {/* Use client-side Links (relative) - prevents jumping to another host */}
+        <div className="links">
+          <Link to="/blogs" className="btn">
+            Blogs
+          </Link>
+          <Link to="/myblogs" className="btn">
+            My Blogs
+          </Link>
+          {!token ? (
+            // This intentionally points at your backend OAuth start endpoint (absolute)
+            <a className="login-btn btn" href={BACKEND_OAUTH}>
+              Login with Google
+            </a>
+          ) : (
+            <>
+              <span style={{ marginLeft: 8 }}>Hi, {userName}</span>
+              <button onClick={handleLogout} className="btn btn-outline">
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </nav>
 
-      {/* Page content */}
-      <div className="p-4">
+      <main>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }
-
 
 export default App;
