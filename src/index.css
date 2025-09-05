@@ -9,8 +9,9 @@
 }
 
 body {
-  background: #f1356d;
+  background: linear-gradient(135deg, #fcefee, #f9f9f9);
   line-height: 1.6;
+  padding: 0 20px;
 }
 
 /* Navbar */
@@ -25,7 +26,7 @@ body {
 
 .navbar h1 {
   color: #f1356d;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
 }
 
@@ -36,9 +37,10 @@ body {
 .navbar a {
   margin-left: 18px;
   text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
   font-weight: 500;
+  color: #555;
   transition: all 0.25s ease;
 }
 
@@ -56,66 +58,66 @@ body {
 
 /* Blog List */
 .blog-list {
-  margin-top: 20px;
+  margin-top: 30px;
   display: grid;
-  gap: 20px;
+  gap: 25px;
 }
 
 /* Responsive Grid */
 @media (max-width: 768px) {
   .blog-list {
-    grid-template-columns: 1fr; /* Mobile */
+    grid-template-columns: 1fr;
   }
 }
-
 @media (min-width: 769px) and (max-width: 1024px) {
   .blog-list {
-    grid-template-columns: 1fr 1fr; /* Tablet */
+    grid-template-columns: 1fr 1fr;
   }
 }
-
 @media (min-width: 1025px) {
   .blog-list {
-    grid-template-columns: 1fr 1fr 1fr; /* Desktop */
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 /* Blog Preview Cards */
 .blog-preview {
   background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .blog-preview:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
 }
 
 .blog-preview h2 {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: #222;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 /* Blog Form */
 .blog-form {
   margin: 20px 0;
-  padding: 20px;
+  padding: 24px;
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
 .blog-form input,
 .blog-form textarea {
   display: block;
   margin-bottom: 14px;
-  padding: 12px;
+  padding: 12px 14px;
   width: 100%;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   background: #fafafa;
   transition: border-color 0.2s, background 0.2s;
@@ -129,7 +131,7 @@ body {
 }
 
 .blog-form textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
 
@@ -137,8 +139,8 @@ body {
   background: #f1356d;
   color: #fff;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
+  padding: 12px 26px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
@@ -147,8 +149,8 @@ body {
 
 .blog-form button:hover {
   background: #e0245e;
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(241, 53, 109, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(241, 53, 109, 0.2);
 }
 
 /* Delete Button */
@@ -156,11 +158,10 @@ body {
   background: #fff;
   color: #f1356d;
   border: 1px solid #f1356d;
-  padding: 10px 18px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
-  margin-top: 10px;
   font-weight: 600;
   transition: all 0.25s ease;
 }
@@ -176,12 +177,10 @@ body {
   background: #fff;
   color: #2d9cdb;
   border: 1px solid #2d9cdb;
-  padding: 10px 18px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
-  margin-top: 10px;
-  margin-left: 10px;
   font-weight: 600;
   transition: all 0.25s ease;
 }
@@ -200,8 +199,13 @@ body {
 .search-box input {
   width: 80%;
   max-width: 400px;
-  padding: 8px;
-  border-radius: 5px;
+  padding: 10px 14px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+  transition: border-color 0.2s ease;
 }
 
+.search-box input:focus {
+  border-color: #f1356d;
+  outline: none;
+}
