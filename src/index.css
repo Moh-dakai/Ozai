@@ -9,25 +9,27 @@
 }
 
 body {
-  background: linear-gradient(135deg, #fcefee, #f9f9f9);
-  line-height: 1.6;
+  background: linear-gradient(135deg, #fdf2f8, #f9fafb);
+  line-height: 1.7;
   padding: 0 20px;
+  color: #444;
 }
 
 /* Navbar */
 .navbar {
-  padding: 20px;
+  padding: 20px 24px;
   display: flex;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #eee;
 }
 
 .navbar h1 {
   color: #f1356d;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .navbar .links {
@@ -37,7 +39,7 @@ body {
 .navbar a {
   margin-left: 18px;
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 8px;
   font-weight: 500;
   color: #555;
@@ -47,6 +49,7 @@ body {
 .navbar a:hover {
   color: #fff;
   background: #f1356d;
+  box-shadow: 0 4px 10px rgba(241, 53, 109, 0.2);
 }
 
 /* App container */
@@ -60,7 +63,7 @@ body {
 .blog-list {
   margin-top: 30px;
   display: grid;
-  gap: 25px;
+  gap: 28px;
 }
 
 /* Responsive Grid */
@@ -84,43 +87,43 @@ body {
 .blog-preview {
   background: #fff;
   border-radius: 14px;
-  padding: 24px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 26px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .blog-preview:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
 }
 
 .blog-preview h2 {
-  margin-bottom: 6px;
-  color: #222;
-  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
 /* Blog Form */
 .blog-form {
-  margin: 20px 0;
-  padding: 24px;
+  margin: 30px 0;
+  padding: 26px;
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
 
 .blog-form input,
 .blog-form textarea {
   display: block;
-  margin-bottom: 14px;
-  padding: 12px 14px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
   background: #fafafa;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .blog-form input:focus,
@@ -128,6 +131,7 @@ body {
   border-color: #f1356d;
   background: #fff;
   outline: none;
+  box-shadow: 0 0 0 3px rgba(241, 53, 109, 0.15);
 }
 
 .blog-form textarea {
@@ -139,18 +143,18 @@ body {
   background: #f1356d;
   color: #fff;
   border: none;
-  padding: 12px 26px;
+  padding: 12px 28px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: background 0.25s ease, transform 0.1s ease;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.2s;
 }
 
 .blog-form button:hover {
   background: #e0245e;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(241, 53, 109, 0.2);
+  box-shadow: 0 6px 16px rgba(241, 53, 109, 0.25);
 }
 
 /* Delete Button */
@@ -158,7 +162,7 @@ body {
   background: #fff;
   color: #f1356d;
   border: 1px solid #f1356d;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
@@ -169,7 +173,7 @@ body {
 .delete-btn:hover {
   background: #f1356d;
   color: #fff;
-  box-shadow: 0 4px 10px rgba(241, 53, 109, 0.2);
+  box-shadow: 0 4px 12px rgba(241, 53, 109, 0.25);
 }
 
 /* Edit Button */
@@ -177,7 +181,7 @@ body {
   background: #fff;
   color: #2d9cdb;
   border: 1px solid #2d9cdb;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
@@ -188,24 +192,26 @@ body {
 .edit-btn:hover {
   background: #2d9cdb;
   color: #fff;
-  box-shadow: 0 4px 10px rgba(45, 156, 219, 0.2);
+  box-shadow: 0 4px 12px rgba(45, 156, 219, 0.25);
 }
 
+/* Search Box */
 .search-box {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
 .search-box input {
   width: 80%;
-  max-width: 400px;
-  padding: 10px 14px;
+  max-width: 420px;
+  padding: 12px 16px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .search-box input:focus {
   border-color: #f1356d;
   outline: none;
+  box-shadow: 0 0 0 3px rgba(241, 53, 109, 0.15);
 }
