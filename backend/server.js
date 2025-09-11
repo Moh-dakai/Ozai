@@ -1,4 +1,3 @@
-// server.js (CommonJS)
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
@@ -103,7 +102,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ---------- AUTH ROUTES ----------
+// AUTH ROUTES 
 // start Google OAuth
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
