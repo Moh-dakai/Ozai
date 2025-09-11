@@ -1,4 +1,3 @@
-// src/pages/BlogsPage.jsx
 import { useEffect, useState } from "react";
 import BlogForm from "../components/BlogForm";
 import BlogList from "./BlogList";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BlogList from "./BlogList"; // reuse the BlogList component
+import BlogList from "./BlogList"; 
 
 const API_URL = "https://ozai-9gqx.onrender.com/blogs";
 
