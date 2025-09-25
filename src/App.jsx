@@ -13,7 +13,7 @@ function App() {
     navigate("/");
   };
 
-  // Backend OAuth start endpoint (open the provider flow)
+  // Backend OAuth start 
   const BACKEND_OAUTH = "https://ozai-9gqx.onrender.com/auth/google";
 
   return (
@@ -33,13 +33,13 @@ function App() {
             My Blogs
           </Link>
           {!token ? (
-            // This intentionally points at your backend OAuth start endpoint (absolute)
+            // This intentionally points at backend OAuth start endpoint
             <a className="login-btn btn" href={BACKEND_OAUTH}>
               Login with Google
             </a>
           ) : (
             <>
-              <span style={{ marginLeft: 8 }}>Hi, {userName}</span>
+              <span style={{ marginLeft: 8 }}>Hi,  { userName}</span>
               <button onClick={handleLogout} className="btn btn-outline">
                 Logout
               </button>
