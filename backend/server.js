@@ -38,8 +38,8 @@ app.use(express.json());
 
 mongoose
   .connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB error:", err));
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB error:", err));
 
 // Models
 
@@ -105,7 +105,7 @@ app.use(
     secret: process.env.SESSION_SECRET || "devsession",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }, // Set true if using HTTPS in production
+    cookie: { secure: false }, // Set true in production
   })
 );
 app.use(passport.initialize());
